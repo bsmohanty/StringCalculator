@@ -13,7 +13,8 @@ namespace StringCalculator
         {
             //string numbers = "";
             //string numbers = "1\n2,3,1\n2,3,1\n2,3,1\n2,3,1\n2,3";
-            string numbers = "1\n2,3";
+            //string numbers = "1\n2,3";
+            string numbers = "1\n2,3,-9\n-7,6";
             Console.Write("                  String Calculator \n************************************************\n\n");
             Calculator calculator = new Calculator();
             numbers = calculator.Add(numbers).ToString();
@@ -27,20 +28,28 @@ namespace StringCalculator
 
             if (String.IsNullOrWhiteSpace(numbers))
             {
-                sum = 0;
+                return sum;
             }
             else
             {
-                if (!IsValidLength(numbers))
+                if (!String.IsNullOrEmpty(NoOfNegativeNumbers(numbers)))
                 {
-                    Console.WriteLine("Number length can't be more than 10 digits.");
+                    Console.WriteLine("Negatives not allowed.");
+                    Console.WriteLine(NoOfNegativeNumbers(numbers) + " are negatives numbers");
                 }
                 else
                 {
-                    sum = SumOfListOfNumbers(numbers);
+                    if (!IsValidLength(numbers))
+                    {
+                        Console.WriteLine("Number length can't be more than 10 digits.");
+                    }
+                    else
+                    {
+                        sum = SumOfListOfNumbers(numbers);
+                    }
                 }
+                return sum;
             }
-            return sum;
         }
 
         public bool IsValidLength(string numbers)
@@ -65,5 +74,27 @@ namespace StringCalculator
             return sum;
         }
 
+        public string NoOfNegativeNumbers(string numbers)
+        {
+            var result = Regex.Matches(numbers, @"-?\d+");
+            StringBuilder builder = new StringBuilder();
+            if (result.Count > 0)
+            {
+
+                for (int index = 0; index < result.Count; index++)
+                {
+                    if (result[index].Value.Contains("-"))
+                    {
+                        builder.Append(result[index].Value + ",");
+                    }
+                }
+            }
+            if (builder.Length != 0)
+            {
+                return builder.ToString().Remove(builder.ToString().Length - 1);
+            }
+            else
+                return String.Empty;
+        }
     }
 }

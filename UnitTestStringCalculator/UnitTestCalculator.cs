@@ -36,5 +36,15 @@ namespace UnitTestStringCalculator
             var output = calculator.SumOfListOfNumbers(input);
             Assert.AreEqual(expectedOutput, output);
         }
+
+        [TestMethod]
+        public void TestCheckNegativeNumberInString()
+        {
+            Calculator calculator = new Calculator();
+            var input = "1\n2,3,-9\n-7,6";
+            var expectedOutput = "-9,-7";
+            var output = calculator.NoOfNegativeNumbers(input);
+            Assert.AreEqual(expectedOutput, output);
+        }
     }
 }
