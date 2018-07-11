@@ -16,5 +16,15 @@ namespace UnitTestStringCalculator
             var output = calculator.Add(input);
             Assert.AreEqual(expectedOutput, output);
         }
+
+        [TestMethod]
+        public void TestUnknowAmountOfNumbers()
+        {
+            Calculator calculator = new Calculator();
+            var input = "1\n2,3,1\n2,3,1\n2,3,1\n2,3,1\n2,3";
+            var expectedOutput = false;
+            var output = calculator.IsValidLength(input);
+            Assert.AreEqual(expectedOutput, output);
+        }
     }
 }
