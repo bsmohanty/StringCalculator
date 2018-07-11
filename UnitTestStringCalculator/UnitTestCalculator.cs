@@ -26,5 +26,15 @@ namespace UnitTestStringCalculator
             var output = calculator.IsValidLength(input);
             Assert.AreEqual(expectedOutput, output);
         }
+
+        [TestMethod]
+        public void TestHandleLineBetweenNumber()
+        {
+            Calculator calculator = new Calculator();
+            var input = "1\n2,3";
+            var expectedOutput = 6;
+            var output = calculator.SumOfListOfNumbers(input);
+            Assert.AreEqual(expectedOutput, output);
+        }
     }
 }
